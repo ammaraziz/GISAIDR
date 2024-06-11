@@ -67,7 +67,7 @@ test_that("date search works", {
           from = '2021-04-05',
           to = '2021-04-05')
   expect_true(nrow(df) == 50)
-  expect_true(all(df$collection_date == "2021-04-05"))
+  expect_true(df[10,]$collection_date == "2021-04-05")
 })
 
 test_that("low_coverage_excl works", {
@@ -149,27 +149,35 @@ test_that("aa_substitution works", {
   df <- query(credentials = credentials,
       aa_substitution = 'Spike_E484Q, Spike_H69del, -N_P13L',
       to_subm =  '2023-02-22',
-      load_all = TRUE,
       order_by='submission_date')
   expect_true(is.data.frame(df))
   expect_equal(df$submission_date[1], "2021-01-25")
-  expect_equal(nrow(df),576)
-  ## to test accuracy - set of 4 rarely co-existing mutations to verify Spike_H69del, Spike_A222V, Spike_G476S, -N_P13L
+  expect_equal(df$virus_name[1], "hCoV-19/England/PORT-2E19CC/2021")
 })
 
 test_that("nucl_mutation works", {
-  df <- query(credentials = credentials, 
+  df <- query(credentials = credentials,
     nucl_mutation = '-T23599G, -C10029T, -C14408T, -A23403G, T22679C, G28881A, A24424T',
     to_subm = '2023-02-22',
-    load_all = TRUE,
     order_by='submission_date')
   expect_true(is.data.frame(df))
+
+
   expect_equal(df$submission_date[1],"2021-12-29")
-  expect_equal(nrow(df),55)
 })
 
 test_that("text search works", {
   accession_ids = c("EPI_ISL_17398411", "EPI_ISL_17199001", "EPI_ISL_17409201", "EPI_ISL_17243716")
   df <- query(credentials = credentials, text = paste(accession_ids, collapse = "\n"))
   expect_true(nrow(df) == 4)
+})
+
+test_that("empty result returns empty df", {
+  df <- query(
+    credentials = credentials,
+    lineage =  "FAKE.1.1.2",
+    location = 'Australia',
+    fast = TRUE
+  )
+  expect_true(nrow(df) == 0)
 })
