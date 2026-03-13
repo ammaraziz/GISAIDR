@@ -3,8 +3,38 @@
 
 GISAID_URL = "https://www.epicov.org/epi3/frontend"
 
-headers = c(accept = "application/json, text/javascript, */*; q=0.01",
-            "content-type" = "application/x-www-form-urlencoded; charset=UTF-8")
+user_agents = c(
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 OPR/126.0.0.0 (Edition Campaign 34)",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 14.4; rv:145.0) Gecko/20100101 Firefox/145.0",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.1 Safari/605.1.15",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 OPR/126.0.0.0",
+  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+  "Mozilla/5.0 (X11; Linux i686; rv:124.0) Gecko/20100101 Firefox/145.0",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0"
+)
+
+headers = c(
+  "User-Agent" = sample(user_agents, 1)
+  "Accept" = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "Accept-Language" = "en-US,en;q=0.9",
+  "Accept-Encoding" = "gzip, deflate, br, zstd",
+  "Content-Type" = "application/x-www-form-urlencoded",
+  "Content-Length" = "332",
+  "Origin" = "https://app1.epicov.org",
+  "Connection" = "keep-alive",
+  "Referer" = "https://app1.epicov.org//epi3/start",
+  "Accept" = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "content-type" = "application/x-www-form-urlencoded; charset=UTF-8",
+  "Upgrade-Insecure-Requests" = "1",
+  "Sec-Fetch-Dest" = "document",
+  "Sec-Fetch-Mode" = "navigate",
+  "Sec-Fetch-Site" = "same-origin",
+  "Priority" = "u=0, i",
+  "TE" = "trailers",
+  )
 
 timestamp <- function() {
   return(as.character(as.integer(Sys.time()) * 1000))
