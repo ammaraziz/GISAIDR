@@ -17,11 +17,11 @@ user_agents = c(
 )
 
 headers = c(
-  "User-Agent" = sample(user_agents, 1)
+  "User-Agent" = sample(user_agents, 1),
   "Accept" = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
   "Accept-Language" = "en-US,en;q=0.9",
   "Accept-Encoding" = "gzip, deflate, br, zstd",
-  "Content-Type" = "application/x-www-form-urlencoded",
+  "Content-Type" = "application/x-www-form-urlencoded; charset=UTF-8",
   "Content-Length" = "332",
   "Origin" = "https://app1.epicov.org",
   "Connection" = "keep-alive",
@@ -33,7 +33,7 @@ headers = c(
   "Sec-Fetch-Mode" = "navigate",
   "Sec-Fetch-Site" = "same-origin",
   "Priority" = "u=0, i",
-  "TE" = "trailers",
+  "TE" = "trailers"
   )
 
 timestamp <- function() {
